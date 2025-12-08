@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Raikan Cinta Alif & Anis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<script>
+	tailwind.config = {
+	theme: {
+    extend: {
+      colors: {
+        'dustypink': '#E0B0B7',
+		'pink' : '#ffc0cb',
+		'flamingopink' : '#f6a1b6',
+				}
+			}
+		   }
+					}
+</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cinzel:wght@400..900&family=Dynalight&family=Explora&family=Great+Vibes&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet">
+	<style>
+        /*
+          Custom CSS for smooth transitions and a few key styles.
+          We use a serif font for headers and a sans-serif for body text.
+        */
+        body {
+            font-family: 'Cinzel', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+		
+		.dynalight-regular {
+			font-family: "Dynalight", cursive;
+			font-weight: 400;
+			font-style: normal;
+		}
+		
+		.amatic-sc-regular {
+			font-family: "Amatic SC", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		.amatic-sc-bold {
+			font-family: "Amatic SC", sans-serif;
+			font-weight: 700;
+			font-style: normal;
+		}
+		
+		.great-vibes-regular {
+			font-family: "Great Vibes", cursive;
+			font-weight: 400;
+			font-style: normal;
+		}
+		
+		.petit-formal-script-regular {
+			font-family: "Petit Formal Script", cursive;
+			font-weight: 400;
+			font-style: normal;
+		}
+		
+		// <weight>: Use a value from 400 to 900
+		// <uniquifier>: Use a unique and descriptive class name
+		.cinzel-normal {
+			font-family: "Cinzel", serif;
+			font-optical-sizing: auto;
+			font-weight: 400;
+			font-style: normal;
+		}
+		
+		.explora-regular {
+			font-family: "Explora", serif;
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		/* Add this to your stylesheet */
+		.frosted-glass {
+		backdrop-filter: blur(1px);
+		-webkit-backdrop-filter: blur(1px); /* For Safari support */
+		background-color: rgba(255, 255, 255, 0.5);
+		}
+		
+		/* Keyframes for the fade-in animation of the text */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Apply the fade-in animation to the text elements with a staggered delay */
+        .fade-in-text {
+            opacity: 0; /* Start hidden */
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .fade-in-text:nth-child(1) { animation-delay: 0s; }
+        .fade-in-text:nth-child(2) { animation-delay: 0.5s; }
+        .fade-in-text:nth-child(3) { animation-delay: 1s; }
+        .fade-in-text:nth-child(4) { animation-delay: 1.5s; }
+        .fade-in-text:nth-child(5) { animation-delay: 2s; }
+        
+        /* NEW: Changed the animation from 3D rotation to a horizontal slide. */
+        #left-page, #right-page {
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #left-page {
+            background-image: url('floralbg.jpg');
+            background-position: left;
+        }
+        #right-page {
+            background-image: url('floralbg.jpg');
+            background-position: right;
+        }
+
+        /* NEW: The `transform: translateX` property now handles the horizontal sliding motion. */
+        .split-open #left-page {
+            transform: translateX(-100%);
+        }
+        .split-open #right-page {
+            transform: translateX(100%);
+        }
+		.image-bismillah {
+			display: flex;
+			justify-content: center; /* Horizontally centers the content */
+		}
+        /*
+          This class ensures smooth scrolling when navigating between sections.
+        */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /*
+          Custom styles for the image carousel.
+        */
+        .carousel-item {
+            display: none;
+            width: 100%;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        
+        /*
+          Modal styles: The overlay covers the whole screen with a dark,
+          semi-transparent background. The modal itself is centered.
+        */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .message-box {
+            display: none; /* Initially hidden */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .message-box.success {
+            background-color: #d1fae5; /* green-100 */
+            color: #065f46; /* green-700 */
+        }
+        
+        .message-box.error {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-700 */
+        }
+        
+        .message-box.visible {
+            display: block;
+        }
+		/*
+            ADDED: Background image and overlay for the main content.
+        */
+        #main-content {
+            background-image: url('bg2.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ensures the background stays fixed while content scrolls */
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Adds a semi-transparent overlay to improve text readability */
+        #main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4); /* White overlay with 40% opacity */
+            z-index: -1;
+        }
+		canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Puts the canvas behind other content */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1; /* Ensures content is on top of the animation */
+        }
+		
+		/* fade-in-animation */
+        .scroll-fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .scroll-fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      
+		   /* scrollbar */
+		   /* This targets the scrollbar itself */
+        ::-webkit-scrollbar {
+            width: 6px; /* Set the width of the scrollbar */
+            background-color: transparent;
+        }
+
+        /* This targets the draggable handle (the thumb) */
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1); /* A very light, semi-transparent color */ /* The color of the scrollbar thumb */
+            border-radius: 6px; /* Rounded corners for the thumb */
+            border: 3px solid transparent; /* Creates space around the thumb */
+        }
+
+        /* This targets the thumb when the user hovers over it */
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.3) /* A darker color on hover */
+        }
+
+        /* This targets the empty space at the end of the scrollbar track */
+        ::-webkit-scrollbar-track-piece:end {
+            background: transparent;
+        }
+
+        /* This targets the corner of the scrollbar where both vertical and horizontal scrollbars meet */
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        /* --- START OF GLITTER EFFECT CSS --- */
+        .glitter-particle {
+            position: fixed;
+            pointer-events: none;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            z-index: 999;
+            animation: glitter-fade 1.5s ease-out forwards;
+        }
+        
+        @keyframes glitter-fade {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+                filter: blur(2px);
+            }
+        }
+
+		
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <audio id="background-music" src="piano.mpeg" loop autoplay></audio>
+
+    <button id="play-pause-button" class="fixed bottom-30 right-6 p-3 bg-pink text-white rounded-full shadow-lg z-50">
+    <!-- The SVG icon is now directly inside the span, replacing the emoji. -->
+    <span id="play-pause-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">  
+            <path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 0 1 .279.583v11.29a2.25 2.25 0 0 1-1.774 2.2l-2.041.44a2.216 2.216 0 0 1-.938-4.332l2.662-.577a.75.75 0 0 0 .591-.733V6.112l-8 1.73v7.684a2.25 2.25 0 0 1-1.774 2.2l-2.042.44a2.216 2.216 0 1 1-.935-4.331l2.659-.573A.75.75 0 0 0 7 12.529V4.236a.75.75 0 0 1 .591-.733l9.5-2.054a.75.75 0 0 1 .63.15Z" clip-rule="evenodd" />  
+        </svg>
+    </span>
+</button>
+	
+	<!-- This div will contain the glitter particles -->
+	<div id="glitter-container"></div>
+	
+    <!-- The modified intro screen with "book pages" -->
+    <div id="intro-screen" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- The left "page" of the book, which will rotate left -->
+        <div id="left-page" class="absolute inset-y-0 left-0 w-1/2 bg-cover bg-center">
+            <!-- Optional: a semi-transparent overlay -->
+            <div class="absolute inset-0 bg-black opacity-30"></div>
+        </div>
+
+        <!-- The right "page" of the book, which will rotate right -->
+        <div id="right-page" class="absolute inset-y-0 right-0 w-1/2 bg-cover bg-center">
+             <!-- Optional: a semi-transparent overlay -->
+            <div class="absolute inset-0 bg-black opacity-30"></div>
+        </div>
+
+        <!-- The content container that will fade in/out -->
+        <div id="intro-content" class="relative z-20 text-white flex flex-col justify-center items-center text-center p-6 transition-opacity duration-500 ease-in-out">
+            <h1 class="great-vibes-regular text-5xl md:text-7xl leading-tight drop-shadow-lg fade-in-text">
+                Alif & Yuhanis
+			</h1>
+            <p class="text-lg md:text-xl font-light fade-in-text">
+                Sunday, December 28th, 2025
+            </p>
+            <button id="open-button" class="mt-8 px-8 py-3 bg-dustypink text-gray-800 rounded-full shadow-lg hover:bg-dustypink-300 transition-colors duration-300 transform hover:scale-105 fade-in-text">
+                Open
+            </button>
+        </div>
+    </div>
+
+
+    <div id="main-content" class="min-h-screen pt-12 pb-20 p-6 sm:px-12 md:px-24 hidden opacity-0">
+	
+	
+		<canvas id="falling-petals-canvas"></canvas>
+        <header class="text-center mb-12 scroll-fade-in-section">
+		<div class="image-bismillah">
+			<img class=" relative w-40 overflow-hidden" src="https://ekaddigital.com/assets/icon/bismillah_a_black.svg" alt="">
+		</div>
+			<p class="text-base text-gray-600">Assalamualaikum w.b.t</p>
+            <p class="text-base text-gray-600">With great pleasure,</p>
+            <h4 class="text-xl md:text-2xl text-gray-900 mb-1">Jasni Bin Hamid</h4>
+			<h4 class="text-lg md:text-xl text-gray-900 mb-1">&</h4>
+			<h4 class="text-xl md:text-2xl text-gray-900 mb-1">Ida rofida Binti Aboo Bakar</h4>
+			<p class="text-base text-gray-600">Together with</p>
+			<h4 class="text-xl md:text-2xl text-gray-900 mb-1">Sazliena Binti Azmi</h4>
+            <p class="text-base text-gray-600">Cordially invite you to join us at the Wedding Reception of our beloved son & daughter</p>
+			<br>            <h2 class="petit-formal-script-regular text-xl md:text-2xl font-bold mb-1"> Muhammad Alif Aiman Bin Jasni</h2>
+			<h2 class="great-vibes-regular text-lg md:text-xl font-bold mb-1"> & </h2>
+			<h2 class="petit-formal-script-regular text-xl md:text-2xl font-bold mb-1"> Nurul Yuhanis Binti Mohd Yusof </h2>
+			<div class="line-container">
+  <div class="horizontal-line"></div>
+</div>
+		</header>
+	
+        <section id="details" class="mb-12 text-center scroll-fade-in-section">
+			<h3 class="font-playfair text-2xl font-bold mb-4">THE CEREMONY & RECEPTION</h3>
+			<div class="frosted-glass p-6 rounded-xl shadow-md border-t-4 border-pink">
+                <p class="text-2xl font-semibold mb-2">Sunday,December 28th, 2025</p>
+                <p class="text-xl mb-4">12:00 PM - 4:00 PM</p>
+                <p class="text-lg">The Petals</p>
+                <p class="text-md text-gray-500 mb-6">2-2-2 Taman Ria, Jalan Bukit Gemuruh, Kampung Tengah, 11920 Teluk Kumbar, Pulau Pinang</p>
+                 <div id="countdown-timer" class="flex justify-center items-center space-x-4 text-xl sm:text-2xl font-bold text-pink">
+                    </div>
+            </div>
+        </section>
+		
+		
+		        <section class="mb-12 scroll-fade-in-section">
+            <div class="relative w-full h-full overflow-hidden rounded-xl shadow-lg">
+                <div id="carousel" class="flex transition-transform ease-in-out duration-700">
+                    <img src="pic1.jpeg" alt="Wedding Photo 1" class="carousel-item active object-cover w-full h-full">
+                    <img src="pic2.jpeg" alt="Wedding Photo 2" class="carousel-item object-cover w-full h-full">
+                    <img src="pic3.jpeg" alt="Wedding Photo 3" class="carousel-item object-cover w-full h-full">
+                    <img src="pic4.jpeg" alt="Wedding Photo 4" class="carousel-item object-cover w-full h-full">
+                    <img src="pic5.jpeg" alt="Wedding Photo 5" class="carousel-item object-cover w-full h-full">
+                    <img src="pic6.jpeg" alt="Wedding Photo 6" class="carousel-item object-cover w-full h-full">
+                    <img src="pic7.jpeg" alt="Wedding Photo 7" class="carousel-item object-cover w-full h-full">
+                    <img src="pic8.jpeg" alt="Wedding Photo 8" class="carousel-item object-cover w-full h-full">
+                    <img src="pic9.jpeg" alt="Wedding Photo 9" class="carousel-item object-cover w-full h-full">
+                    <img src="pic10.jpeg" alt="Wedding Photo 10" class="carousel-item object-cover w-full h-full">
+                    <img src="pic11.jpeg" alt="Wedding Photo 11" class="carousel-item object-cover w-full h-full">
+
+                </div>
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(0)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(1)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(2)"></span>
+				    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(3)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(4)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(5)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(6)"></span>	
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(7)"></span>
+                    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(8)"></span>
+				    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(9)"></span>
+				    <span class="dot w-2 h-2 bg-white rounded-full cursor-pointer opacity-50" onclick="currentSlide(10)"></span>
+
+                </div>
+            </div>
+        </section>
+		
+		
+        <section id="rsvp-section" class="mb-12 text-center scroll-fade-in-section">
+            <h3 class="font-playfair text-2xl font-bold mb-4">ATTENDANCE</h3>
+            <div class="frosted-glass p-6 rounded-xl shadow-md border-t-4 border-pink">
+                <p class="text-md text-gray-700 mb-6">
+                    Please let us know if you'll be able to join us for our special day.
+                    We kindly ask you to respond by November 28th, 2025.
+                </p>
+                <button id="open-rsvp-button" class="px-8 py-3 bg-pink text-white rounded-full shadow-lg hover:bg-dustypink transition-colors duration-300 transform hover:scale-105">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOpty9BAWrqVomRF1HQEMbValXBVItOKYZw9UMMyl8EFr6YA/viewform?usp=header"
+                   target="_blank" rel="noopener noreferrer">
+                    RSVP
+					</a>
+                </button>
+            </div>
+        </section>
+
+        <section id="guestbook-section" class="mb-12 text-center scroll-fade-in-section">
+            <h3 class="font-playfair text-2xl font-bold mb-4">GUESTBOOK</h3>
+            <div class="frosted-glass p-6 rounded-xl shadow-md border-t-4 border-pink">
+			<p class="text-md text-gray-700 mb-6">
+                    Please leave us a special message or well wishes as we start our new life together.
+                </p>
+                <div id="guestbook-entries" class="amatic-sc-bold h-64 overflow-y-auto p-3 bg-frosted-glass-100 rounded-lg shadow-inner mb-6 text-center space-y-4">
+                    </div>
+                <button id="open-guestbook-form-button" class="mt-6 px-8 py-3 bg-pink text-white rounded-full shadow-lg hover:bg-dustypink transition-colors duration-300 transform hover:scale-105">
+                    Write a Message
+                </button>
+            </div>
+        </section>
+        
+
+		<section id="Doa" class="mb-12 text-center scroll-fade-in-section">
+		<div class="frosted-glass p-6 rounded-xl shadow-md border-t-4 border-pink">
+        <p class="text-md text-gray-700">
+		بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ
+		</p>
+        <p class="dynalight-regular text-lg text-gray-700">
+        From Your immense and boundless love, You bestow upon this husband and wife Your grace and forgiveness. 
+		Bless this ceremony with Your blessings from beginning to end.
+		Truly, this union is by Your will. Grant them tranquility, happiness, and resilient hearts to face every challenge. 
+		May the life they build together last until the end of their days, and bless them with righteous children.
+		By Your guidance and light, may they be prosperous in this life and, even more so, in the hereafter.
+		</p>
+        <p class="dynalight-regular text-md text-gray-700">
+		– Aamiin Ya Rabbal ‘Alamin –
+		</p>
+            </div>
+        </section>
+
+        <section id="Terima Kasih" class="mb-12 text-center scroll-fade-in-section">
+            <div class="frosted-glass p-6 rounded-xl shadow-md border-t-4 border-pink">
+                <p class="text-md text-gray-700">
+				Your presence at our wedding is 
+				the most precious gift.
+				</p>
+                <p class="text-md text-gray-700">
+				Thank You.
+				</p>
+            </div>
+        </section>
+		
+        <section id="creator-credit" class="mb-12 text-center scroll-fade-in-section">
+            <div>
+                <p class="text-md text-gray-700">
+                    This digital invitation was created with ❤️ by 
+					<a href = "https://wa.me/60109094907"> Naufal. <a/>
+                </p>
+            </div>
+        </section>
+
+        
+        <div id="guestbook-form-content" class="hidden">
+            <h3 class="font-playfair text-3xl font-bold text-center mb-6">Leave a Wish</h3>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <form id="guestbook-form" class="space-y-4">
+                    <div>
+                        <label for="guestbook-name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="guestbook-name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 p-2">
+                    </div>
+                    <div>
+                        <label for="guestbook-message" class="block text-sm font-medium text-gray-700">Your Message</label>
+                        <textarea id="guestbook-message" name="message" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 p-2"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-colors duration-300">
+                        Submit Message
+                    </button>
+                    <div id="guestbook-message-status" class="message-box"></div>
+                </form>
+            </div>
+        </div>
+
+        <!--
+		This section displays the wedding location details,
+		including a Google Maps iframe and links to Waze and Google Maps.
+		It is initially hidden and will be shown with JavaScript.
+		-->
+		<div id="location-content" class="hidden">
+			<h3 class="font-playfair text-3xl font-bold text-center mb-6">Location</h3>
+    
+			<div class="bg-white p-6 rounded-xl shadow-md">
+				<p class="text-xl font-semibold mb-2">The Petals</p>
+				<p class="text-md text-gray-700 mb-4">2-2-2 Taman Ria, Jalan Bukit Gemuruh, Kampung Tengah, 11920 Teluk Kumbar, Pulau Pinang</p>
+        
+				<!-- Google Maps iframe for the location -->
+				<div class="w-full h-64 rounded-md overflow-hidden border border-gray-200">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1181.105904778905!2d100.23012497009725!3d5.301516725876002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304a9588992b16fb%3A0xfd978125f23f1bea!2sThe%20Petals!5e0!3m2!1sen!2smy!4v1754155881923!5m2!1sen!2smy" 
+						width="100%" 
+						height="100%" 
+						style="border:0;" 
+						allowfullscreen="" 
+						loading="lazy" 
+						referrerpolicy="no-referrer-when-downgrade">
+					</iframe>
+				</div>
+        
+				<!-- Buttons for navigation to Waze and Google Maps -->
+				<div class="flex justify-center space-x-4 mt-6">
+            
+					<!-- Waze navigation link with a Heroicons SVG -->
+					<a href="https://www.waze.com/en/live-map/directions/my/pulau-pinang/teluk-kumbar/the-petals?place=ChIJ-xYrmYiVSjAR6hs_8iWBl_0" 
+						target="_blank" 
+						class="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-300">
+						<!-- Heroicons 'car' SVG icon -->
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+							<path fill-rule="evenodd" d="M8.157 2.176a1.5 1.5 0 0 0-1.147 0l-4.084 1.69A1.5 1.5 0 0 0 2 5.25v10.877a1.5 1.5 0 0 0 2.074 1.386l3.51-1.452 4.26 1.762a1.5 1.5 0 0 0 1.146 0l4.083-1.69A1.5 1.5 0 0 0 18 14.75V3.872a1.5 1.5 0 0 0-2.073-1.386l-3.51 1.452-4.26-1.762ZM7.58 5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 7.58 5Zm5.59 2.75a.75.75 0 0 0-1.5 0v6.5a.75.75 0 0 0 1.5 0v-6.5Z" clip-rule="evenodd" />
+						</svg>
+						Waze
+					</a>
+            
+					<!-- Google Maps navigation link with an SVG icon -->
+					<a href="https://maps.app.goo.gl/WVPRnQKENYYp5sHa8" 
+						target="_blank" 
+						class="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition-colors duration-300">
+						<!-- SVG icon for Google Maps -->
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
+							<path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-6.5 6.326a6.52 6.52 0 0 1-1.5.174 6.487 6.487 0 0 1-5.011-2.36l.49-.98a.423.423 0 0 1 .614-.164l.294.196a.992.992 0 0 0 1.491-1.139l-.197-.593a.252.252 0 0 1 .126-.304l1.973-.987a.938.938 0 0 0 .361-1.359.375.375 0 0 1 .239-.576l.125-.025A2.421 2.421 0 0 0 12.327 6.6l.05-.149a1 1 0 0 0-.242-1.023l-1.489-1.489a.5.5 0 0 1-.146-.353v-.067a6.5 6.5 0 0 1 5.392 9.23 1.398 1.398 0 0 0-.68-.244l-.566-.566a1.5 1.5 0 0 0-1.06-.439h-.172a1.5 1.5 0 0 0-1.06.44l-.593.592a.501.501 0 0 1-.13.093l-1.578.79a1 1 0 0 0-.553.894v.191a1 1 0 0 0 1 1h.5a.5.5 0 0 1 .5.5v.326Z" clip-rule="evenodd" />
+						</svg>
+						Google Maps
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+        <div id="contact-content" class="hidden">
+            <h3 class="font-playfair text-3xl font-bold text-center mb-6">Contact us</h3>
+            <!--
+  This section displays contact information for two individuals,
+  with links to WhatsApp and a phone number, now using
+  modern SVG icons for a consistent look.
+-->
+<div class="bg-white p-6 rounded-xl shadow-md text-center space-y-4">
+    
+    <!-- Contact card for Jasni Hamid -->
+    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <span class="text-lg font-semibold">Jasni Hamid</span>
+        <div class="flex space-x-2">
+            <!-- WhatsApp button with SVG icon -->
+            <a href="https://wa.me/60124035083" 
+               target="_blank" 
+               class="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M10 3c-4.31 0-8 3.033-8 7 0 2.024.978 3.825 2.499 5.085a3.478 3.478 0 0 1-.522 1.756.75.75 0 0 0 .584 1.143 5.976 5.976 0 0 0 3.936-1.108c.487.082.99.124 1.503.124 4.31 0 8-3.033 8-7s-3.69-7-8-7Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-2-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            
+            <!-- Phone call button with SVG icon -->
+            <a href="tel:+60124035083" 
+               class="p-2 rounded-full bg-rose-500 text-white hover:bg-rose-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact card for Ida Rofida -->
+    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <span class="text-lg font-semibold">Ida Rofida</span>
+        <div class="flex space-x-2">
+            <!-- WhatsApp button with SVG icon -->
+            <a href="https://wa.me/60124333207" 
+               target="_blank" 
+               class="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M10 3c-4.31 0-8 3.033-8 7 0 2.024.978 3.825 2.499 5.085a3.478 3.478 0 0 1-.522 1.756.75.75 0 0 0 .584 1.143 5.976 5.976 0 0 0 3.936-1.108c.487.082.99.124 1.503.124 4.31 0 8-3.033 8-7s-3.69-7-8-7Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-2-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            
+            <!-- Phone call button with SVG icon -->
+            <a href="tel:+60124333207" 
+               class="p-2 rounded-full bg-rose-500 text-white hover:bg-rose-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </div>
+	    <!-- Contact card for Sazliena -->
+    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <span class="text-lg font-semibold">Sazliena</span>
+        <div class="flex space-x-2">
+            <!-- WhatsApp button with SVG icon -->
+            <a href="https://wa.me/60124333207" 
+               target="_blank" 
+               class="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M10 3c-4.31 0-8 3.033-8 7 0 2.024.978 3.825 2.499 5.085a3.478 3.478 0 0 1-.522 1.756.75.75 0 0 0 .584 1.143 5.976 5.976 0 0 0 3.936-1.108c.487.082.99.124 1.503.124 4.31 0 8-3.033 8-7s-3.69-7-8-7Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-2-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            
+            <!-- Phone call button with SVG icon -->
+            <a href="tel:+60124333207" 
+               class="p-2 rounded-full bg-rose-500 text-white hover:bg-rose-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </div>
+	
+	
+</div>
+        </div>
+
+
+<nav id="nav-bar" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t-2 border-gray-100 p-2 z-50 hidden opacity-0">
+    <div class="flex justify-around items-center h-full">
+
+        <!--
+          Each 'a' tag is now a flex container that stacks its contents vertically.
+          - flex: Enables flexbox.
+          - flex-col: Arranges children in a column.
+          - items-center: Centers children horizontally within the column.
+        -->
+        <a href="#" id="refresh-button" class="flex-1 flex flex-col items-center py-2 px-1 text-gray-500 hover:text-pink transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+            <span class="mt-2 text-sm font-medium">Refresh</span>
+        </a>
+        
+        <a href="#rsvp-section" id="rsvp-button" class="flex-1 flex flex-col items-center py-2 px-1 text-gray-500 hover:text-pink transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+            <span class="mt-2 text-sm font-medium">RSVP</span>
+        </a>
+
+        <a href="#location-section" id="location-button" class="flex-1 flex flex-col items-center py-2 px-1 text-gray-500 hover:text-pink transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+            <span class="mt-2 text-sm font-medium">Location</span>
+        </a>
+
+        <a href="#contact-section" id="contact-button" class="flex-1 flex flex-col items-center py-2 px-1 text-gray-500 hover:text-pink transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+            <span class="mt-2 text-sm font-medium">Contact</span>
+        </a>
+    </div>
+</nav>
+
+    
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content w-full sm:max-w-md">
+            <div class="flex justify-end">
+                <button id="close-modal-button" class="text-gray-500 hover:text-gray-900 text-2xl font-bold">×</button>
+            </div>
+            <div id="modal-body" class="pt-4">
+                </div>
+        </div>
+    </div>
+    
+    <div id="general-message-box" class="message-box fixed top-4 left-1/2 -translate-x-1/2 w-11/12 sm:max-w-md rounded-lg shadow-lg z-[101]"></div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+		// Get the canvas and its context
+        const canvas = document.getElementById('falling-petals-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set the canvas dimensions to fill the window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Array of brown and amber colors for a "dry leaf" effect
+        const leafColors = ['#FFC0CB', '#FF69B4', '#FFB6C1', '#FF1493', '#FF0080'];
+
+        // Petal class definition
+        class Petal {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -Math.random() * canvas.height; // Start from above the screen
+                this.size = Math.random() * 2 + 0.5; // Smaller size between 0.5 and 2.5
+                this.speed = Math.random() * 0.5 + 0.2; // Slower falling speed
+                this.rotation = Math.random() * 360; // Initial random rotation
+                this.rotationSpeed = Math.random() * 0.1 - 0.05; // Random rotation speed
+                this.opacity = Math.random() * 0.7 + 0.3; // Random opacity
+                this.color = leafColors[Math.floor(Math.random() * leafColors.length)];
+                this.sway = Math.random() * 2 - 1; // Random sway direction
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                
+                // Draw a simple dry leaf shape
+                ctx.beginPath();
+                ctx.moveTo(0, this.size * -2);
+                ctx.bezierCurveTo(this.size * 2, this.size * -1.5, this.size * 1.5, this.size * 1.5, 0, this.size * 2);
+                ctx.bezierCurveTo(this.size * -1.5, this.size * 1.5, this.size * -2, this.size * -1.5, 0, this.size * -2);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.y * 0.01) * this.sway; // Adds a more natural, random sway
+                this.rotation += this.rotationSpeed;
+
+                // Reset the leaf when it falls off the screen
+                if (this.y > canvas.height + this.size * 2) {
+                    this.reset();
+                }
+            }
+        }
+
+        // Create an array of leaves
+        const leaves = [];
+        const numberOfLeaves = 150; // Increased count for a fuller effect
+        for (let i = 0; i < numberOfLeaves; i++) {
+            leaves.push(new Petal());
+        }
+
+        // Main animation loop
+        function animate() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw each leaf
+            leaves.forEach(leaf => {
+                leaf.update();
+                leaf.draw();
+            });
+
+            // Request the next frame
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation on window load
+        window.onload = function () {
+            animate();
+        };
+
+        // --- Reusable Message Box Function ---
+        // This function is now in the global scope of the script to be accessible everywhere.
+        const messageBox = document.getElementById('general-message-box');
+        function showMessage(type, text, duration = 5000) {
+            messageBox.textContent = text;
+            messageBox.classList.remove('success', 'error', 'hidden');
+            messageBox.classList.add('visible', type);
+            setTimeout(() => {
+                messageBox.classList.remove('visible');
+                messageBox.classList.add('hidden');
+            }, duration);
+        }
+        
+        // Wrap the entire application logic in a 'DOMContentLoaded' event listener.
+        // This ensures that the code only runs after the entire HTML document has
+        // been loaded and parsed by the browser, preventing errors where a script
+        // tries to access an element that doesn't exist yet.
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            // --- Firebase Setup & Authentication ---
+            
+            // This is the Firebase configuration you provided.
+            // It is used to initialize your project.
+            const firebaseConfig = {
+                apiKey: "AIzaSyA-AWZstpEXLlNdIcxBacz3CqgvHuO7WTk",
+                authDomain: "kadkahwinapp.firebaseapp.com",
+                projectId: "kadkahwinapp",
+                storageBucket: "kadkahwinapp.firebasestorage.app",
+                messagingSenderId: "379804424047",
+                appId: "1:379804424047:web:aee85c708ce1a0bc39ba9a",
+                measurementId: "G-GC67C5YW8H"
+            };
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+            // Initialize Firebase App and Services
+            let app;
+            let db;
+            let auth;
+            let userId;
+            
+            try {
+                // Initialize the Firebase app with the provided config.
+                app = initializeApp(firebaseConfig);
+                // Get the Firestore and Auth service instances.
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // Sign in anonymously or with a custom token.
+                // This is where the authentication process begins.
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                userId = auth.currentUser.uid;
+                console.log("Successfully signed in with user ID:", userId);
+
+                // --- Firestore Collection References ---
+                // The collections are scoped to the app ID to prevent conflicts.
+                const guestbookCollectionRef = collection(db, `artifacts/${appId}/public/data/guestbook-entries`);
+
+				// NEW: Declared the placeholder image as a constant for easy modification.
+				const backgroundImage = 'floralbg.jpg';
+				document.getElementById('left-page').style.backgroundImage = `url('${backgroundImage}')`;
+				document.getElementById('right-page').style.backgroundImage = `url('${backgroundImage}')`;
+				// --- Intro Screen & Main Content Toggle ---
+				const openButton = document.getElementById('open-button');
+				const introScreen = document.getElementById('intro-screen');
+				const introContent = document.getElementById('intro-content');
+				const leftPage = document.getElementById('left-page');
+				const rightPage = document.getElementById('right-page');
+				const mainContent = document.getElementById('main-content');
+				const navBar = document.getElementById('nav-bar');
+                // [START of new code]
+                const backgroundMusic = document.getElementById('background-music');
+                const playPauseButton = document.getElementById('play-pause-button');
+                const playPauseIcon = document.getElementById('play-pause-icon');
+
+                // Function to play the music
+                // Define the SVG icons as constants for cleaner code.
+const pauseSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+        <path d="M5.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75A.75.75 0 0 0 7.25 3h-1.5ZM12.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75h-1.5Z" />
+    </svg>
+`;
+
+const playSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+        <path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 0 1 .279.583v11.29a2.25 2.25 0 0 1-1.774 2.2l-2.041.44a2.216 2.216 0 0 1-.938-4.332l2.662-.577a.75.75 0 0 0 .591-.733V6.112l-8 1.73v7.684a2.25 2.25 0 0 1-1.774 2.2l-2.042.44a2.216 2.216 0 1 1-.935-4.331l2.659-.573A.75.75 0 0 0 7 12.529V4.236a.75.75 0 0 1 .591-.733l9.5-2.054a.75.75 0 0 1 .63.15Z" clip-rule="evenodd" />
+    </svg>
+`;
+
+const playMusic = () => {
+    backgroundMusic.play().then(() => {
+        // Use innerHTML to set the SVG for the pause icon
+        playPauseIcon.innerHTML = pauseSVG;
+    }).catch(error => {
+        console.error('Autoplay was prevented. User interaction required.', error);
+    });
+};
+
+// Event listener to start the music when the invitation is opened
+// Event listener to start the music and open the book animation
+        openButton.addEventListener('click', () => {
+            // 1. Fade out the text content
+            introContent.classList.add('opacity-0');
+
+            // 2. Start the music and book opening animation after the text fades
+            setTimeout(() => {
+                // Add the class to trigger the book opening
+                introScreen.classList.add('split-open');
+                playMusic(); // Uncomment this line if you have a playMusic function
+            }, 500); // Corresponds to the transition duration of the text fade-out
+
+            // 3. After the book is fully open, hide the intro screen and show main content
+            setTimeout(() => {
+                introScreen.classList.add('hidden'); // Hide the intro screen
+                mainContent.classList.remove('hidden');
+                navBar.classList.remove('hidden');
+
+                setTimeout(() => {
+                    mainContent.classList.remove('opacity-0');
+                    navBar.classList.remove('opacity-0');
+                     startCountdown(); // Uncomment this line if you have a startCountdown function
+                }, 50); // A small delay to ensure the transition works
+            }, 1500); // 1s for the book animation + 0.5s for the text fade-out
+        });
+
+// Event listener for the play/pause button
+playPauseButton.addEventListener('click', () => {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        // Use innerHTML to set the SVG for the pause icon
+        playPauseIcon.innerHTML = pauseSVG;
+    } else {
+        backgroundMusic.pause();
+        // Use innerHTML to set the SVG for the play icon
+        playPauseIcon.innerHTML = playSVG;
+    }
+});
+
+                // --- Image Carousel ---
+                let slideIndex = 0;
+                const slides = document.querySelectorAll('.carousel-item');
+                const dots = document.querySelectorAll('.dot');
+                const totalSlides = slides.length;
+
+                // Function to show a specific slide.
+                function showSlides(n) {
+                    // Hide all slides and remove the active dot class.
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('opacity-100'));
+                    dots.forEach(dot => dot.classList.add('opacity-50'));
+
+                    // Set the new slide and dot to active.
+                    slides[n].classList.add('active');
+                    dots[n].classList.remove('opacity-50');
+                    dots[n].classList.add('opacity-100');
+                }
+
+                // Function to move to the next slide automatically.
+                function nextSlide() {
+                    slideIndex = (slideIndex + 1) % totalSlides;
+                    showSlides(slideIndex);
+                }
+
+                // Function to manually set the slide via a dot click.
+                function currentSlide(n) {
+                    slideIndex = n;
+                    showSlides(slideIndex);
+                }
+
+                // Start the automatic slideshow.
+                setInterval(nextSlide, 3000); // Change image every 5 seconds.
+                showSlides(slideIndex); // Show the first slide on load.
+
+
+                // --- Modal Logic ---
+                const modalOverlay = document.getElementById('modal-overlay');
+                const modalBody = document.getElementById('modal-body');
+                const closeModalButton = document.getElementById('close-modal-button');
+                const navButtons = document.querySelectorAll('#nav-bar a');
+
+                // Function to open the modal with specific content
+                function openModal(contentElement) {
+                    // Clone the content to display it in the modal.
+                    const clonedContent = contentElement.cloneNode(true);
+                    // Remove the 'hidden' class so it's visible.
+                    clonedContent.classList.remove('hidden'); 
+                    modalBody.innerHTML = ''; // Clear previous content.
+                    modalBody.appendChild(clonedContent); // Add the new content.
+                    modalOverlay.classList.add('active'); // Show the modal overlay.
+                    
+                    // If the modal content is the Guestbook form, re-attach the event listener.
+                    if (contentElement.id === 'guestbook-form-content') {
+                        const guestbookForm = clonedContent.querySelector('#guestbook-form');
+                        if (guestbookForm) {
+                            guestbookForm.addEventListener('submit', handleGuestbookSubmit);
+                        }
+                    }
+                }
+
+                // Function to close the modal
+                function closeModal() {
+                    modalOverlay.classList.remove('active');
+                }
+                
+                // Attach event listeners for all buttons that should open a modal.
+                navButtons.forEach(button => {
+                    // The RSVP and Guestbook buttons now scroll, so they are handled differently.
+                    if (button.id !== 'rsvp-button' && button.id !== 'guestbook-button') {
+                        button.addEventListener('click', (e) => {
+                            e.preventDefault(); // Prevent the default link behavior.
+                            const sectionId = button.id.replace('-button', ''); // e.g., 'location'
+                            
+                            // The 'refresh-button' is handled differently
+                            if (sectionId === 'refresh') {
+                                location.reload();
+                                return;
+                            }
+                            const contentElement = document.getElementById(`${sectionId}-content`);
+                            openModal(contentElement);
+                        });
+                    }
+                });
+                
+                // Add listener for the new Guestbook button on the main page.
+                const openGuestbookFormButton = document.getElementById('open-guestbook-form-button');
+                openGuestbookFormButton.addEventListener('click', () => {
+                    const guestbookFormContent = document.getElementById('guestbook-form-content');
+                    openModal(guestbookFormContent);
+                });
+
+                // Close modal when the close button is clicked.
+                closeModalButton.addEventListener('click', closeModal);
+
+                // Close modal when the overlay is clicked, but not the content inside.
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target.id === 'modal-overlay') {
+                        closeModal();
+                    }
+                });
+                
+                // --- Guestbook Logic ---
+                const guestbookEntriesContainer = document.getElementById('guestbook-entries');
+
+                // Set up a real-time listener for the guestbook entries.
+                // This will automatically update the page whenever a new message is submitted.
+                onSnapshot(guestbookCollectionRef, (snapshot) => {
+                    const entries = [];
+                    snapshot.forEach(doc => {
+                        entries.push(doc.data());
+                    });
+                    renderGuestbookEntries(entries);
+                }, (error) => {
+                    console.error("Error fetching guestbook entries: ", error);
+                    showMessage('error', 'Failed to load guestbook messages.');
+                });
+                
+                // Function to render the guestbook entries in the DOM.
+                function renderGuestbookEntries(entries) {
+                    // Clear existing entries.
+                    guestbookEntriesContainer.innerHTML = '';
+                    
+                    // If there are no entries, show a placeholder message.
+                    if (entries.length === 0) {
+                        guestbookEntriesContainer.innerHTML = '<p class="text-center text-gray-500">Be the first to leave a message!</p>';
+                        return;
+                    }
+
+                    // Sort entries by timestamp in descending order so the newest are on top.
+                    entries.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate());
+
+                    // Create and append a card for each entry.
+                    entries.forEach(entry => {
+                        const entryCard = document.createElement('div');
+                        entryCard.classList.add('bg-frosted-glass-50', 'p-4', );
+                        entryCard.innerHTML = `
+                            <p class="font-bold text-lg text-rose-500">${entry.name}</p>
+                            <p class="text-gray-700 mt-2">${entry.message}</p>
+                        `;
+                        guestbookEntriesContainer.appendChild(entryCard);
+                    });
+                }
+
+                // Handle guestbook form submission.
+                async function handleGuestbookSubmit(e) {
+                    e.preventDefault();
+                    const guestbookForm = e.target;
+                    const formData = new FormData(guestbookForm);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                        await addDoc(guestbookCollectionRef, {
+                            ...data,
+                            timestamp: new Date()
+                        });
+
+                        console.log('Guestbook message saved successfully!', data);
+                        showMessage('success', 'Thank you for your lovely message!');
+                        closeModal(); // Close the modal after successful submission.
+
+                        guestbookForm.reset();
+
+                    } catch (error) {
+                        console.error('Error saving guestbook message:', error);
+                        showMessage('error', 'There was an error saving your message. Please try again.');
+                    }
+                }
+
+
+                // --- Countdown Timer (Updated to be on the main page) ---
+                const weddingDate = new Date('December 28, 2025 12:00:00').getTime();
+                const countdownEl = document.getElementById('countdown-timer');
+                
+                // Function to update the countdown. It now takes the element to update.
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const distance = weddingDate - now;
+
+                    // If the countdown is over, display a message.
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        countdownEl.innerHTML = `<span class="text-4xl text-rose-500 font-bold">The day is here!</span>`;
+                        return;
+                    }
+
+                    // Calculate time units.
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Update the countdown element's HTML.
+                    countdownEl.innerHTML = `
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl sm:text-4xl">${days}</span>
+                            <span class="text-xs sm:text-sm font-normal">DAYS</span>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">:</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl sm:text-4xl">${hours}</span>
+                            <span class="text-xs sm:text-sm font-normal">HOURS</span>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">:</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl sm:text-4xl">${minutes}</span>
+                            <span class="text-xs sm:text-sm font-normal">MINUTES</span>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">:</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl sm:text-4xl">${seconds}</span>
+                            <span class="text-xs sm:text-sm font-normal">SECONDS</span>
+                        </div>
+                    `;
+                }
+
+                let countdownInterval;
+                // This function is now responsible for starting the continuous countdown.
+                function startCountdown() {
+                    // Call the update function immediately and then every second.
+                    updateCountdown();
+                    countdownInterval = setInterval(updateCountdown, 1000);
+                }
+            } catch (error) {
+                console.error("Error during Firebase authentication:", error);
+                
+                // Show a detailed error message to the user
+                const introScreen = document.getElementById('intro-screen');
+                introScreen.innerHTML = `
+                    <div class="text-center p-6 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg max-w-sm mx-auto">
+                        <h2 class="text-2xl font-bold mb-4">Connection Error</h2>
+                        <p class="mb-4">Failed to connect to the database. Please check your Firebase project settings.</p>
+                        <p class="text-sm font-semibold">Possible causes:</p>
+                        <ul class="text-left text-sm list-disc list-inside mt-2 space-y-1">
+                            <li>The \`apiKey\` in \`firebaseConfig\` might be incorrect.</li>
+                            <li>"Anonymous Sign-in" is not enabled in your Firebase Authentication settings.</li>
+                        </ul>
+                    </div>
+                `;
+            }
+			// fade-in-out animation
+            const sectionsToAnimate = document.querySelectorAll('.scroll-fade-in-section');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.2 
+            });
+
+            sectionsToAnimate.forEach(section => {
+                observer.observe(section);
+            });
+            
+
+        });
+		
+    </script>
+</body>
+</html>
